@@ -1,0 +1,170 @@
+.progressContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.pageHeader h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: var(--color-text-primary);
+}
+
+.timeRangeSelector {
+  display: flex;
+  gap: 8px;
+}
+
+.tabsContainer {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--tab-bg-color, var(--color-bg-secondary));
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  background-color: var(--tab-bg-color, var(--color-bg-secondary));
+  filter: brightness(0.95);
+}
+
+.activeTab {
+  background-color: var(--tab-bg-color, var(--color-bg-secondary));
+  filter: brightness(0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  color: var(--tab-color, var(--color-primary));
+}
+
+.tabIcon {
+  margin-bottom: 4px;
+  font-size: 1.2rem;
+  color: var(--tab-color, var(--color-text-secondary));
+}
+
+.activeTab .tabIcon {
+  color: var(--tab-color, var(--color-primary));
+}
+
+.chartCard {
+  margin-bottom: 24px;
+  padding: 20px;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.metricInfo {
+  display: flex;
+  align-items: center;
+}
+
+.metricIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  margin-right: 16px;
+  font-size: 1.2rem;
+}
+
+.chartHeader h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.latestValue {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.changeIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.changeValue {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.changePercentage {
+  font-size: 0.9rem;
+}
+
+.increase {
+  color: var(--color-success);
+}
+
+.decrease {
+  color: var(--color-danger);
+}
+
+.chartContainer {
+  height: 400px;
+  position: relative;
+}
+
+.noDataMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+  .pageHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .chartHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .changeIndicator {
+    align-items: flex-start;
+  }
+  
+  .chartContainer {
+    height: 300px;
+  }
+} 

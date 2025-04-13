@@ -1,0 +1,240 @@
+.goalsContainer {
+  width: 100%;
+}
+
+.goalsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.goalsHeader h1 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.goalsHeader p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+}
+
+.addButton {
+  background-color: var(--color-purple) !important;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.buttonIcon {
+  margin-right: var(--spacing-xs);
+}
+
+.goalsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.goalCard {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.goalCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.goalHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.goalIcon {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(136, 111, 234, 0.1);
+  color: var(--color-purple);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-md);
+  flex-shrink: 0;
+  font-size: var(--font-size-lg);
+}
+
+.goalInfo {
+  flex: 1;
+}
+
+.goalTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.goalType {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.goalDescription {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+.goalProgress {
+  margin-bottom: var(--spacing-md);
+}
+
+.progressBar {
+  height: 8px;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: var(--spacing-xs);
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.progressDetails {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.statusText {
+  font-weight: var(--font-weight-medium);
+}
+
+.goalFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.goalDates {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+}
+
+.targetDate {
+  color: var(--color-text-secondary);
+}
+
+.daysRemaining {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.goalActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progressSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60%;
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+  outline: none;
+}
+
+.progressSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-purple);
+  cursor: pointer;
+}
+
+.progressSlider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-purple);
+  cursor: pointer;
+}
+
+.completedBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--color-teal);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  color: var(--color-text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.emptyStateIcon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-purple);
+  opacity: 0.5;
+}
+
+.emptyState h2 {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.emptyState p {
+  margin-bottom: var(--spacing-lg);
+}
+
+.addEmptyButton {
+  margin: 0 auto;
+  background-color: var(--color-purple) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .goalsHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+  
+  .goalsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .goalHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .goalIcon {
+    margin-bottom: var(--spacing-sm);
+  }
+} 

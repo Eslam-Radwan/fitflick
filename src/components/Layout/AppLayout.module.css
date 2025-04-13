@@ -1,0 +1,62 @@
+.appContainer {
+  height: 100vh;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.mainContent {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--color-background);
+  transition: margin-left 0.3s ease;
+  padding: var(--spacing-lg);
+  width: calc(100% - var(--sidebar-width));
+  margin-left: var(--sidebar-width);
+}
+
+.contentWrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.sidebarToggle {
+  display: none;
+  position: fixed;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  z-index: 1000;
+  background-color: var(--color-purple);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s ease;
+}
+
+.sidebarToggle:hover {
+  transform: scale(1.05);
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .sidebarToggle {
+    display: flex;
+  }
+  
+  .mainContent {
+    width: 100%;
+    margin-left: 0;
+    padding-top: calc(var(--spacing-lg) + 40px);
+  }
+  
+  .shifted {
+    margin-left: var(--sidebar-width);
+  }
+} 

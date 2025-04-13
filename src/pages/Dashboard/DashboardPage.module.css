@@ -1,0 +1,270 @@
+.dashboardContainer {
+  width: 100%;
+}
+
+.dashboardHeader {
+  margin-bottom: var(--spacing-xl);
+}
+
+.dashboardHeader h1 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.dashboardHeader p {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.statsCard {
+  min-height: 180px;
+}
+
+.statValue {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin: var(--spacing-md) 0;
+  display: flex;
+  align-items: baseline;
+}
+
+.statUnit {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  margin-left: var(--spacing-sm);
+  font-weight: var(--font-weight-normal);
+}
+
+.statProgress {
+  margin-top: var(--spacing-md);
+}
+
+.progressBar {
+  height: 8px;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: var(--spacing-xs);
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.progressText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: right;
+}
+
+.caloriesDetail, .heartRateDetail {
+  margin-top: var(--spacing-md);
+}
+
+.caloriesItem, .heartRateItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xs);
+}
+
+.caloriesLabel, .heartRateLabel {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.caloriesValue, .heartRateValue {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.chartCard {
+  min-height: 300px;
+}
+
+.chartContainer {
+  height: 250px;
+}
+
+/* Tab content specific styles */
+.tabIntro {
+  margin-bottom: var(--spacing-xl);
+}
+
+.tabIntro h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.tabIntro p {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+}
+
+/* Activities tab */
+.activitiesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.activityCard {
+  min-height: 160px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.activityCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.activityDetails p {
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Nutrition tab */
+.nutritionSummary {
+  margin-top: var(--spacing-xl);
+}
+
+.nutritionCard {
+  padding: var(--spacing-lg);
+}
+
+.macrosList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.macroItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.macroLabel {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.macroBar {
+  height: 10px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: var(--spacing-xs);
+}
+
+.macroFill {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.macroValue {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  text-align: right;
+}
+
+/* Health tab */
+.healthMetrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.healthCard {
+  min-height: 300px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  .chartsGrid, .healthMetrics {
+    grid-template-columns: 1fr;
+  }
+  
+  .statValue {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .activitiesList {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tabHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-xl);
+}
+
+.addButton {
+  background-color: var(--color-teal) !important;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.buttonIcon {
+  margin-right: var(--spacing-xs);
+}
+
+/* Empty state for no activities */
+.emptyState {
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  color: var(--color-text-secondary);
+}
+
+.emptyStateIcon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-tertiary);
+}
+
+/* Animation for new items */
+@keyframes highlightNew {
+  0% {
+    background-color: rgba(0, 198, 173, 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+} 
