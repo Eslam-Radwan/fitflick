@@ -104,7 +104,7 @@ const LandingPage = () => {
         </div>
       </section>
       
-      {/* CTA Section */}
+      {/* Call to Action Section */}
       <section className={styles.ctaSection}>
         <div className={styles.ctaContent}>
           <h2>Ready to Transform Your Fitness Journey?</h2>

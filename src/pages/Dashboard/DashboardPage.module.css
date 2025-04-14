@@ -107,7 +107,7 @@
   height: 250px;
 }
 
-/* Tab content specific styles */
+/* tab content styles */
 .tabIntro {
   margin-bottom: var(--spacing-xl);
 }
@@ -124,7 +124,7 @@
   color: var(--color-text-secondary);
 }
 
-/* Activities tab */
+/* activities tab */
 .activitiesList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -147,7 +147,7 @@
   color: var(--color-text-secondary);
 }
 
-/* Nutrition tab */
+/* nutrition tab */
 .nutritionSummary {
   margin-top: var(--spacing-xl);
 }
@@ -192,7 +192,7 @@
   text-align: right;
 }
 
-/* Health tab */
+/* health tab */
 .healthMetrics {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -203,7 +203,7 @@
   min-height: 300px;
 }
 
-/* Media Queries for Responsive Design */
+/* Media Queries */
 @media (max-width: 768px) {
   .statsGrid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -246,7 +246,7 @@
   margin-right: var(--spacing-xs);
 }
 
-/* Empty state for no activities */
+/* empty state for no activities */
 .emptyState {
   text-align: center;
   padding: var(--spacing-xl) 0;
@@ -259,7 +259,7 @@
   color: var(--color-text-tertiary);
 }
 
-/* Animation for new items */
+/* animation for new items */
 @keyframes highlightNew {
   0% {
     background-color: rgba(0, 198, 173, 0.2);

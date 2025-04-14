@@ -22,19 +22,19 @@ A modern, responsive fitness tracking dashboard built with React and CSS Modules
 
 ## Getting Started
 
-1. Clone the repository:
 
-2. Install dependencies:
+
+1. Install dependencies:
    ```
    npm install
    ```
 
-3. Run the development server:
+2. Run the development server:
    ```
    npm run dev
    ```
 
-4. Open your browser and navigate to `http://localhost:5173`
+3. Open your browser and navigate to `http://localhost:5173`
 
 ## Demo User
 

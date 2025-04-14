@@ -18,7 +18,7 @@ import 'chartjs-adapter-date-fns';
 import { FaWeight, FaRunning, FaHeartbeat, FaFireAlt, FaWater } from 'react-icons/fa';
 import styles from './ProgressPage.module.css';
 
-// Register ChartJS components
+// ChartJS components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -90,11 +90,10 @@ const ProgressPage = () => {
   const [activeTab, setActiveTab] = useState('weight');
   const [progressData, setProgressData] = useState({});
   const [chartData, setChartData] = useState(null);
-  const [timeRange, setTimeRange] = useState('week'); // 'week', 'month', 'year'
+  const [timeRange, setTimeRange] = useState('week'); 
 
   useEffect(() => {
-    // This would be replaced with an API call in a real application
-    // fetchUserProgressData(currentUser.uid)
+    // Would be replaced with an API call 
     setProgressData(mockProgressData);
   }, [currentUser]);
 

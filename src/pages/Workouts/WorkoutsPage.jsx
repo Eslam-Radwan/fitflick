@@ -48,8 +48,8 @@ const WorkoutsPage = () => {
   const [editingWorkout, setEditingWorkout] = useState(null);
 
   useEffect(() => {
-    // This would be replaced with an API call in a real application
-    // fetchUserWorkouts(currentUser.uid)
+
+    // Would be replaced with an API call 
     setWorkouts(mockWorkouts);
   }, [currentUser]);
 
@@ -64,19 +64,18 @@ const WorkoutsPage = () => {
   };
 
   const handleDeleteWorkout = (workoutId) => {
-    // In a real app, you would call an API to delete the workout
+    // Call an API to delete the workout
     setWorkouts(workouts.filter(workout => workout.id !== workoutId));
   };
 
   const handleFormSubmit = (workoutData) => {
     if (editingWorkout) {
-      // Update existing workout
       const updatedWorkouts = workouts.map(workout => 
         workout.id === editingWorkout.id ? { ...workout, ...workoutData } : workout
       );
       setWorkouts(updatedWorkouts);
     } else {
-      // Add new workout with a generated ID
+      // Add new workout
       const newWorkout = {
         id: Math.random().toString(36).substr(2, 9),
         ...workoutData

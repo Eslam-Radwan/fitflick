@@ -7,7 +7,7 @@ export const mockUser = {
   profilePicture: "https://randomuser.me/api/portraits/men/32.jpg"
 };
 
-// Mock fitness stats for the dashboard in array format for the new tabs implementation
+// Mock fitness stats for the dashboard for the new tabs implementation
 export const mockDashboardStats = [
   {
     userId: 1,
@@ -21,8 +21,6 @@ export const mockDashboardStats = [
     sleepHours: 7.2
   }
 ];
-
-// Legacy format for backward compatibility
 export const mockDashboardStatsLegacy = {
   steps: {
     today: 7532,
@@ -45,7 +43,7 @@ export const mockDashboardStatsLegacy = {
     max: 142
   },
   sleep: {
-    lastNight: 7.2, // hours
+    lastNight: 7.2, 
     weeklyAverage: 6.8,
     goal: 8
   }
@@ -56,8 +54,8 @@ export const mockWorkouts = [
   {
     id: 1,
     type: "Running",
-    duration: 35, // minutes
-    distance: 5.2, // km
+    duration: 35, 
+    distance: 5.2, 
     calories: 320,
     date: "2023-06-15T08:30:00Z"
   },
@@ -100,7 +98,7 @@ export const mockGoals = [
     title: "Lose 5kg",
     description: "Reach target weight of 75kg",
     targetDate: "2023-07-30",
-    progress: 40 // percentage
+    progress: 40 
   },
   {
     id: 2,
@@ -126,12 +124,12 @@ export const mockChartData = {
   },
   weeklyWorkouts: {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    data: [45, 60, 0, 45, 30, 0, 35] // minutes per day
+    data: [45, 60, 0, 45, 30, 0, 35] 
   },
   monthlyProgress: {
     labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-    weight: [80, 79.2, 78.5, 77.8], // kg
-    bodyFat: [22, 21.5, 21.2, 20.8] // percentage
+    weight: [80, 79.2, 78.5, 77.8], 
+    bodyFat: [22, 21.5, 21.2, 20.8] 
   },
   calorieBalance: {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],

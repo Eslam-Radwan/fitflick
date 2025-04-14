@@ -36,8 +36,8 @@ const ProfilePage = () => {
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
-  
-  // Populate form with user data when component mounts or currentUser changes
+
+  // Add user data to form when currentUser changes
   useEffect(() => {
     if (currentUser) {
       setFormData({
@@ -58,7 +58,7 @@ const ProfilePage = () => {
       [name]: value
     }));
     
-    // Clear error for this field if exists
+    
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -93,17 +93,17 @@ const ProfilePage = () => {
       return;
     }
     
-    // In a real app, this would send data to a backend
-    console.log('Profile update submitted:', formData);
+    // // send data to a backend
+    // console.log('Profile update submitted:', formData);
     
-    // Update user profile (mock implementation)
+    // Update user profile 
     if (updateUserProfile) {
       updateUserProfile(formData)
         .then(() => {
           setIsEditing(false);
           setSuccessMessage('Profile updated successfully!');
           
-          // Clear success message after 3 seconds
+
           setTimeout(() => {
             setSuccessMessage('');
           }, 3000);
@@ -111,18 +111,19 @@ const ProfilePage = () => {
         .catch(error => {
           setErrors({ form: error.message || 'Failed to update profile' });
         });
-    } else {
-      // For demo purposes only, simulate successful update
-      // This would be replaced with actual API calls in a real app
-      setTimeout(() => {
-        setIsEditing(false);
-        setSuccessMessage('Profile updated successfully!');
+    } 
+    // else {
+
+    //   // Would be replaced with actual API calls 
+    //   setTimeout(() => {
+    //     setIsEditing(false);
+    //     setSuccessMessage('Profile updated successfully!');
         
-        setTimeout(() => {
-          setSuccessMessage('');
-        }, 3000);
-      }, 500);
-    }
+    //     setTimeout(() => {
+    //       setSuccessMessage('');
+    //     }, 3000);
+    //   }, 500);
+    // }
   };
   
   const handleCancel = () => {
@@ -145,8 +146,8 @@ const ProfilePage = () => {
   const handleProfilePictureChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // In a real app, you would upload this file to a server
-      // For now, we'll just create a local URL
+
+      // Create a local URL
       const fileURL = URL.createObjectURL(file);
       setFormData(prev => ({
         ...prev,
