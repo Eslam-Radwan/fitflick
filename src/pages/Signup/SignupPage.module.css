@@ -99,7 +99,7 @@
   opacity: 0.9;
 }
 
-/* Media Queries for Responsive Design */
+/* Media Queries  */
 @media (max-width: 768px) {
   .signupContainer {
     flex-direction: column;

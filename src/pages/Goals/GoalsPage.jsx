@@ -32,11 +32,11 @@ const GoalsPage = () => {
   // Handle goal form submission
   const handleGoalSubmit = (goalData) => {
     const newGoal = {
-      id: Date.now(), // Generate a unique ID
+      id: Date.now(), 
       ...goalData
     };
     
-    // Add the new goal to state (in a real app, this would be sent to a server)
+    // Add the new goal to state
     setUserGoals(prevGoals => [newGoal, ...prevGoals]);
     
     // Close the modal
@@ -54,7 +54,7 @@ const GoalsPage = () => {
     );
   };
   
-  // Helper function to determine status text
+  // Determining status text
   const getStatusText = (progress) => {
     if (progress >= 100) return 'Completed';
     if (progress > 75) return 'Almost there';
@@ -63,7 +63,7 @@ const GoalsPage = () => {
     return 'Just started';
   };
   
-  // Get icon for goal type
+  // Icon for goal type
   const getGoalIcon = (goalType) => {
     switch (goalType) {
       case 'weight':
@@ -81,7 +81,7 @@ const GoalsPage = () => {
     }
   };
   
-  // Format date
+  
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);

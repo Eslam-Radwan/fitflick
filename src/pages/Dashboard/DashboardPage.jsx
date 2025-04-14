@@ -35,7 +35,7 @@ import {
 } from 'chart.js';
 import { Bar, Line } from 'react-chartjs-2';
 
-// Register ChartJS components
+//ChartJS components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -53,7 +53,7 @@ const DashboardPage = () => {
   const [userWorkouts, setUserWorkouts] = useState(mockWorkouts);
   const [activeTab, setActiveTab] = useState(0);
   
-  // Chart options
+  // chart options
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -64,7 +64,7 @@ const DashboardPage = () => {
     },
   };
   
-  // Weekly steps chart data
+  // weekly steps chart data
   const stepsChartData = {
     labels: mockChartData.weeklySteps.labels,
     datasets: [
@@ -78,7 +78,7 @@ const DashboardPage = () => {
     ],
   };
   
-  // Weekly calories chart data
+  // weekly calories chart data
   const caloriesChartData = {
     labels: mockChartData.calorieBalance.labels,
     datasets: [
@@ -99,7 +99,7 @@ const DashboardPage = () => {
     ],
   };
   
-  // Weekly activity chart data
+  // weekly activity chart data
   const activityChartData = {
     labels: mockChartData.weeklyWorkouts.labels,
     datasets: [
@@ -113,27 +113,27 @@ const DashboardPage = () => {
     ],
   };
   
-  // Find user's stats or fall back to mock
+  // find user's stats or fall back to mock
   const userStats = mockDashboardStats.find(user => user.userId === currentUser?.id) || mockDashboardStats[0];
   
-  // Handle workout form submission
+  // handle workout form submission
   const handleWorkoutSubmit = (workoutData) => {
     const newWorkout = {
-      id: Date.now(), // Generate a unique ID
+      id: Date.now(),
       ...workoutData
     };
     
-    // Add the new workout to state (in a real app, this would be sent to a server)
+    // add the new workout to state
     setUserWorkouts(prevWorkouts => [newWorkout, ...prevWorkouts]);
     
-    // Close the modal
+    // close the modal
     setIsWorkoutModalOpen(false);
     
-    // Switch to Activities tab
+    // switch to Activities tab
     setActiveTab(1);
   };
   
-  // Format date helper function
+  // format date helper function
   const formatDate = (dateString) => {
     const options = { 
       year: 'numeric', 
@@ -145,7 +145,7 @@ const DashboardPage = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
   
-  // Get icon for workout type
+  // get icon for workout type
   const getWorkoutIcon = (type) => {
     switch (type) {
       case 'running':
@@ -163,7 +163,7 @@ const DashboardPage = () => {
     }
   };
   
-  // Return the dashboard with tabs
+  // return the dashboard with tabs
   return (
     <div className={styles.dashboardContainer}>
       <header className={styles.dashboardHeader}>

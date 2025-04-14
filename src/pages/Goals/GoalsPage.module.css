@@ -217,7 +217,7 @@
   gap: var(--spacing-xs);
 }
 
-/* Media queries for responsive design */
+/* Media queries */
 @media (max-width: 768px) {
   .goalsHeader {
     flex-direction: column;

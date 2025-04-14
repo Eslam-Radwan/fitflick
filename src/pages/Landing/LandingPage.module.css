@@ -192,7 +192,7 @@
   color: var(--color-text-secondary);
 }
 
-/* CTA Section Styles */
+/* Call to Action Section Styles */
 .ctaSection {
   padding: var(--spacing-xxl);
   background: linear-gradient(135deg, var(--color-purple), var(--color-pink));
@@ -353,8 +353,8 @@
   }
 }
 
-/* Mobile Menu Button - Would be implemented with state in a real app */
-.mobileMenuButton {
+/* Mobile Menu Button */
+/* .mobileMenuButton {
   display: none;
 }
 
@@ -362,4 +362,4 @@
   .mobileMenuButton {
     display: block;
   }
-} 
+}  */
