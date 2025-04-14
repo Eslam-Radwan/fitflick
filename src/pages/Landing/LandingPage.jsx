@@ -18,7 +18,7 @@ const LandingPage = () => {
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.logo}>
-          <h1>Fit-N</h1>
+          <h1>FitFlick</h1>
         </div>
         <nav className={styles.nav}>
           <Link to="/features" className={styles.navLink}>Features</Link>
@@ -34,7 +34,6 @@ const LandingPage = () => {
         </nav>
       </header>
       
-      {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>
@@ -64,11 +63,10 @@ const LandingPage = () => {
         </div>
       </section>
       
-      {/* Features Section */}
       <section className={styles.featuresSection}>
         <div className={styles.sectionHeader}>
           <h2>Everything You Need to Succeed</h2>
-          <p>Fit-N provides all the tools to help you track, analyze, and improve your fitness journey.</p>
+          <p>FitFlick provides all the tools to help you track, analyze, and improve your fitness journey.</p>
         </div>
         
         <div className={styles.featuresGrid}>
@@ -110,7 +108,7 @@ const LandingPage = () => {
       <section className={styles.ctaSection}>
         <div className={styles.ctaContent}>
           <h2>Ready to Transform Your Fitness Journey?</h2>
-          <p>Join thousands of users already tracking their progress with Fit-N.</p>
+          <p>Join thousands of users already tracking their progress with FitFlick.</p>
           <Button 
             onClick={() => navigate('/signup')} 
             size="large"
@@ -125,7 +123,7 @@ const LandingPage = () => {
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
           <div className={styles.footerLogo}>
-            <h2>Fit-N</h2>
+            <h2>FitFlick</h2>
             <p>Your fitness journey, simplified.</p>
           </div>
           
@@ -161,7 +159,7 @@ const LandingPage = () => {
         </div>
         
         <div className={styles.footerBottom}>
-          <p>&copy; {new Date().getFullYear()} Fit-N. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} FitFlick. All rights reserved.</p>
         </div>
       </footer>
     </div>

@@ -77,7 +77,7 @@ const LoginPage = () => {
     <div className={styles.loginContainer}>
       <div className={styles.formContainer}>
         <div className={styles.headerContainer}>
-          <h1 className={styles.title}>Welcome to Fit-N</h1>
+          <h1 className={styles.title}>Welcome to FitFlick</h1>
           <p className={styles.subtitle}>Log in to access your fitness dashboard</p>
         </div>
         
@@ -132,7 +132,7 @@ const LoginPage = () => {
       <div className={styles.imageContainer}>
         <div className={styles.overlayContent}>
           <h2>Track Your Fitness Journey</h2>
-          <p>Set goals, monitor progress, and achieve your fitness dreams with Fit-N.</p>
+          <p>Set goals, monitor progress, and achieve your fitness dreams with FitFlick.</p>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-# Fit-N: Fitness Tracking Dashboard
+# FitFlick: Fitness Tracking Dashboard
 
 A modern, responsive fitness tracking dashboard built with React and CSS Modules. This frontend-only application simulates a fitness tracking platform where users can monitor their health statistics, log workouts, set goals, and track progress.
 
@@ -23,10 +23,6 @@ A modern, responsive fitness tracking dashboard built with React and CSS Modules
 ## Getting Started
 
 1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/fit-n.git
-   cd fit-n
-   ```
 
 2. Install dependencies:
    ```

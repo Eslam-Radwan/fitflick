@@ -23,7 +23,7 @@ const Sidebar = ({ isOpen }) => {
   return (
     <aside className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
       <div className={styles.sidebarHeader}>
-        <h2 className={styles.logo}>Fit-N</h2>
+        <h2 className={styles.logo}>FitFlick</h2>
         <div className={styles.userInfo}>
           <img 
             src={currentUser?.profilePicture || 'https://via.placeholder.com/40'} 

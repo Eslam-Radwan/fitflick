@@ -89,7 +89,7 @@ const SignupPage = () => {
       <div className={styles.formContainer}>
         <div className={styles.headerContainer}>
           <h1 className={styles.title}>Create Your Account</h1>
-          <p className={styles.subtitle}>Join Fit-N to start your fitness journey</p>
+          <p className={styles.subtitle}>Join FitFlick to start your fitness journey</p>
         </div>
         
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -167,7 +167,7 @@ const SignupPage = () => {
       <div className={styles.imageContainer}>
         <div className={styles.overlayContent}>
           <h2>Achieve Your Fitness Goals</h2>
-          <p>Track workouts, monitor progress, and reach your personal milestones with Fit-N.</p>
+          <p>Track workouts, monitor progress, and reach your personal milestones with FitFlick.</p>
         </div>
       </div>
     </div>
