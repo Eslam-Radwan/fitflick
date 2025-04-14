@@ -10,7 +10,6 @@ const AppLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   
-  // Redirect to login if not authenticated
   if (!currentUser) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
@@ -19,7 +18,6 @@ const AppLayout = () => {
     setSidebarOpen(!sidebarOpen);
   };
   
-  // Close sidebar when clicking outside on mobile
   const handleContentClick = () => {
     if (window.innerWidth <= 768 && sidebarOpen) {
       setSidebarOpen(false);
@@ -28,7 +26,6 @@ const AppLayout = () => {
   
   return (
     <div className={styles.appContainer}>
-      {/* Mobile Toggle Button */}
       <button 
         className={styles.sidebarToggle} 
         onClick={toggleSidebar}
@@ -37,10 +34,8 @@ const AppLayout = () => {
         {sidebarOpen ? <FaTimes /> : <FaBars />}
       </button>
       
-      {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} />
       
-      {/* Main Content */}
       <main 
         className={`${styles.mainContent} ${sidebarOpen ? styles.shifted : ''}`}
         onClick={handleContentClick}
