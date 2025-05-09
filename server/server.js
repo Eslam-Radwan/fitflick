@@ -42,6 +42,7 @@ const userRoutes = require('./routes/users');
 const workoutRoutes = require('./routes/workouts');
 const goalRoutes = require('./routes/goals');
 const progressRoutes = require('./routes/progress');
+const dashboardRoutes = require('./routes/dashboard');
 
 // Initialize express app
 const app = express();
@@ -57,6 +58,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/goals', goalRoutes);
 app.use('/api/progress', progressRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // Generate docs
 const swaggerSpec = swaggerJsdoc(swaggerOptions);

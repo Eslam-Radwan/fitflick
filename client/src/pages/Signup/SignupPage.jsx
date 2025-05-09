@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { Link } from 'react-router-dom';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
 import styles from './SignupPage.module.css';
-
+import SignupService from './SignupService';
 const SignupPage = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -13,76 +12,27 @@ const SignupPage = () => {
     confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  
-  const { signup } = useAuth();
-  const navigate = useNavigate();
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    // clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
-  
-  const validateForm = () => {
-    const newErrors = {};
-    
-    if (!formData.name) {
-      newErrors.name = 'Name is required';
-    }
-    
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
-    }
-    
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
-    
-    if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'Confirm your password';
-    } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
-    
-    return newErrors;
-  };
-  
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const formErrors = validateForm();
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
+    if(formData.password !== formData.confirmPassword) {
+      setErrors({ ...errors, confirmPassword: 'Passwords do not match' });
       return;
     }
-    
-    setIsLoading(true);
-    
-    try {
-      await signup(formData.name, formData.email, formData.password);
-      console.log('Signup successful!');
-      navigate('/app/dashboard');
-    } catch (error) {
-      console.error('Signup failed:', error);
-      setErrors({ general: 'Failed to create account. Please try again.' });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    const data = await SignupService.register(formData);
+    if(data)
+      console.log('User registered successfully:', data);
+    else
+      setErrors({ ...errors, general: 'Registration failed. Please try again.' });
+      
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: '' }); // Clear error for the field being edited
+  }
   
   return (
     <div className={styles.signupContainer}>
@@ -92,7 +42,7 @@ const SignupPage = () => {
           <p className={styles.subtitle}>Join FitFlick to start your fitness journey</p>
         </div>
         
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} method='post' onSubmit={handleSubmit}>
           {errors.general && (
             <div className={styles.errorAlert}>{errors.general}</div>
           )}
@@ -145,12 +95,8 @@ const SignupPage = () => {
             required
           />
           
-          <Button
-            type="submit"
-            fullWidth
-            disabled={isLoading}
-          >
-            {isLoading ? 'Creating Account...' : 'Sign Up'}
+          <Button type="submit"fullWidth>
+             Sign Up
           </Button>
           
           <div className={styles.formFooter}>

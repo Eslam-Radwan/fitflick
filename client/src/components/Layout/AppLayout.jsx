@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-import { Outlet, useLocation, Navigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import styles from './AppLayout.module.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 const AppLayout = () => {
-  const { currentUser } = useAuth();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const location = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   
-  if (!currentUser) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
+
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);

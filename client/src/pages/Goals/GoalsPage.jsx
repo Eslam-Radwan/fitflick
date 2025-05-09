@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../../components/UI/Card';
 import Button from '../../components/UI/Button';
 import Modal from '../../components/UI/Modal';
 import GoalForm from '../../components/Goals/GoalForm';
-import { mockGoals } from '../../data/mockData';
+import GoalService from './GoalService';
 import styles from './GoalsPage.module.css';
 import { 
   FaBullseye, 
@@ -19,39 +19,54 @@ import {
 } from 'react-icons/fa';
 
 const GoalsPage = () => {
-  const { currentUser } = useAuth();
-  const [userGoals, setUserGoals] = useState(
-    // Add goalType if missing from mockGoals data
-    mockGoals.map(goal => ({
-      ...goal,
-      goalType: goal.goalType || 'weight'
-    }))
-  );
+  const [userGoals, setUserGoals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [isGoalModalOpen, setIsGoalModalOpen] = useState(false);
   
+  useEffect(() => {
+    fetchGoals();
+  }, []);
+
+  const fetchGoals = async () => {
+    try {
+      setIsLoading(true);
+      const goals = await GoalService.getGoals();
+      setUserGoals(goals);
+      setError(null);
+    } catch (err) {
+      setError('Failed to fetch goals. Please try again later.');
+      console.error('Error fetching goals:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
   // Handle goal form submission
-  const handleGoalSubmit = (goalData) => {
-    const newGoal = {
-      id: Date.now(), 
-      ...goalData
-    };
-    
-    // Add the new goal to state
-    setUserGoals(prevGoals => [newGoal, ...prevGoals]);
-    
-    // Close the modal
-    setIsGoalModalOpen(false);
+  const handleGoalSubmit = async (goalData) => {
+    try {
+      const newGoal = await GoalService.createGoal(goalData);
+      setUserGoals(prevGoals => [newGoal, ...prevGoals]);
+      setIsGoalModalOpen(false);
+    } catch (err) {
+      setError('Failed to create goal. Please try again.');
+      console.error('Error creating goal:', err);
+    }
   };
   
   // Handle goal update
-  const handleGoalProgress = (goalId, newProgress) => {
-    setUserGoals(prevGoals => 
-      prevGoals.map(goal => 
-        goal.id === goalId 
-          ? { ...goal, progress: newProgress } 
-          : goal
-      )
-    );
+  const handleGoalProgress = async (goalId, newProgress) => {
+    try {
+      const updatedGoal = await GoalService.updateGoalProgress(goalId, newProgress);
+      setUserGoals(prevGoals => 
+        prevGoals.map(goal => 
+          goal.id === goalId ? updatedGoal : goal
+        )
+      );
+    } catch (err) {
+      setError('Failed to update goal progress. Please try again.');
+      console.error('Error updating goal progress:', err);
+    }
   };
   
   // Determining status text
@@ -81,7 +96,6 @@ const GoalsPage = () => {
     }
   };
   
-  
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
@@ -96,6 +110,19 @@ const GoalsPage = () => {
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays;
   };
+
+  if (isLoading) {
+    return <div className={styles.loading}>Loading goals...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className={styles.error}>
+        <p>{error}</p>
+        <Button onClick={fetchGoals}>Retry</Button>
+      </div>
+    );
+  }
   
   return (
     <div className={styles.goalsContainer}>

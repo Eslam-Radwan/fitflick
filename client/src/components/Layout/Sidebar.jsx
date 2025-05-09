@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 import styles from './Sidebar.module.css';
+import { getUser } from '../../hooks/User'; // Assuming you have a utility function to get user info
+import {logout} from '../../hooks/Auth'; // Assuming you have a utility function to logout
 import { 
   FaHome, 
   FaDumbbell, 
@@ -12,25 +13,26 @@ import {
 } from 'react-icons/fa';
 
 const Sidebar = ({ isOpen }) => {
-  const { currentUser, logout } = useAuth();
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   
   const handleLogout = async () => {
-    await logout();
+    logout();
     navigate('/login');
   };
   
+
+  useEffect(() => {
+    setUser(getUser())
+  }, []);
+
   return (
     <aside className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
       <div className={styles.sidebarHeader}>
         <h2 className={styles.logo}>FitFlick</h2>
         <div className={styles.userInfo}>
-          <img 
-            src={currentUser?.profilePicture || 'https://via.placeholder.com/40'} 
-            alt="User" 
-            className={styles.avatar}
-          />
-          <p className={styles.userName}>{currentUser?.name}</p>
+          <p className={styles.userName}>{user?.name}</p>
+          <p>{user?.email}</p>
         </div>
       </div>
       
@@ -96,4 +98,4 @@ const Sidebar = ({ isOpen }) => {
   );
 };
 
-export default Sidebar; 
+export default Sidebar;

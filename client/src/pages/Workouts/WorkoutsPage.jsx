@@ -1,37 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
 import Card from '../../components/UI/Card';
 import Button from '../../components/UI/Button';
 import WorkoutForm from '../../components/Workouts/WorkoutForm';
 import { FaPlus, FaEdit, FaTrash, FaDumbbell, FaRunning, FaSwimmer, FaWalking, FaBicycle } from 'react-icons/fa';
 import styles from './WorkoutsPage.module.css';
+import WorkoutService from './WorkoutsService'; // Assuming you have a utility function to get workouts
 
-const mockWorkouts = [
-  {
-    id: '1',
-    type: 'running',
-    duration: 45,
-    distance: 5.2,
-    calories: 450,
-    date: '2023-06-15T08:30:00Z'
-  },
-  {
-    id: '2',
-    type: 'weight_training',
-    duration: 60,
-    distance: null,
-    calories: 320,
-    date: '2023-06-14T17:15:00Z'
-  },
-  {
-    id: '3',
-    type: 'cycling',
-    duration: 75,
-    distance: 20,
-    calories: 580,
-    date: '2023-06-12T06:45:00Z'
-  }
-];
 
 const workoutIcons = {
   running: <FaRunning />,
@@ -42,16 +16,18 @@ const workoutIcons = {
 };
 
 const WorkoutsPage = () => {
-  const { currentUser } = useAuth();
   const [workouts, setWorkouts] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editingWorkout, setEditingWorkout] = useState(null);
 
   useEffect(() => {
-
-    // Would be replaced with an API call 
-    setWorkouts(mockWorkouts);
-  }, [currentUser]);
+    (async() => {
+      const data = await WorkoutService.getWorkouts();
+        setWorkouts(data.workouts);
+        console.log(data.workouts);
+        
+    })()
+  }, []);
 
   const handleAddWorkout = () => {
     setEditingWorkout(null);
@@ -199,4 +175,4 @@ const WorkoutsPage = () => {
   );
 };
 
-export default WorkoutsPage; 
+export default WorkoutsPage;

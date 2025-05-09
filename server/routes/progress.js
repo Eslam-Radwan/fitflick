@@ -174,6 +174,64 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+
+router.get('/stats', auth, async (req, res) => {
+  try {
+    // Get all progress metrics for the user
+    const progress = await Progress.find({ user: req.user.id });
+
+    // Calculate statistics
+    const stats = {
+      totalEntries: progress.length,
+      totalWeight: 0,
+      totalSteps: 0,
+      totalCalories: 0,
+      totalWater: 0,
+      totalHeartRate: 0,
+      totalSleep: 0,
+      totalBodyFat: 0,
+      totalOther: 0
+    };
+
+    progress.forEach(entry => {
+      switch (entry.metric) {
+        case 'weight':
+          stats.totalWeight += entry.value;
+          break;
+        case 'steps':
+          stats.totalSteps += entry.value;
+          break;
+        case 'calories':
+          stats.totalCalories += entry.value;
+          break;
+        case 'water':
+          stats.totalWater += entry.value;
+          break;
+        case 'heartRate':
+          stats.totalHeartRate += entry.value;
+          break;
+        case 'sleep':
+          stats.totalSleep += entry.value;
+          break;
+        case 'bodyFat':
+          stats.totalBodyFat += entry.value;
+          break;
+        case 'other':
+          stats.totalOther += entry.value;
+          break;
+        default:
+          break;
+      }
+    });
+
+    res.json(stats);
+  } catch (err) {
+    console.error('Get progress stats error:', err.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+
+})
+
 /**
  * @swagger
  * /api/progress/{metric}:
