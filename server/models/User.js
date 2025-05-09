@@ -20,11 +20,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Password is required'],
       minlength: [6, 'Password must be at least 6 characters']
-    },
-    profilePicture: {
-      type: String,
-      default: 'https://via.placeholder.com/150'
-    },
+    }, 
     height: {
       type: Number,
       min: 0
@@ -32,23 +28,20 @@ const UserSchema = new mongoose.Schema(
     weight: {
       type: Number,
       min: 0
-    },
-    birthday: {
-      type: Date
-    },
+    }, 
     gender: {
       type: String,
-      enum: ['male', 'female', 'other', 'prefer not to say']
+      enum: ['male', 'female']
     },
     activityLevel: {
       type: String,
       enum: ['sedentary', 'lightly active', 'moderately active', 'very active', 'extremely active'],
       default: 'moderately active'
+    } 
+    },
+    {
+      timestamps: true
     }
-  },
-  {
-    timestamps: true
-  }
 );
 
 // Method to check if password matches

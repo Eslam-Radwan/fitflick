@@ -5,9 +5,126 @@ const Progress = require('../models/Progress');
 const router = express.Router();
 
 /**
- * @route   GET /api/progress
- * @desc    Get all progress metrics for current user with filtering options
- * @access  Private
+ * @swagger
+ * components:
+ *   schemas:
+ *     Progress:
+ *       type: object
+ *       required:
+ *         - metric
+ *         - value
+ *         - unit
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The auto-generated id of the progress entry
+ *         user:
+ *           type: string
+ *           description: The user id who owns this progress entry
+ *         metric:
+ *           type: string
+ *           enum: [weight, steps, calories, water, heartRate, sleep, bodyFat, other]
+ *           description: The type of metric being recorded
+ *         value:
+ *           type: number
+ *           description: The value of the metric
+ *         unit:
+ *           type: string
+ *           description: The unit of measurement
+ *         date:
+ *           type: string
+ *           format: date-time
+ *           description: The date of the progress entry
+ *         notes:
+ *           type: string
+ *           description: Optional notes about the progress entry
+ *     ProgressSummary:
+ *       type: object
+ *       properties:
+ *         metric:
+ *           type: string
+ *         latest:
+ *           type: number
+ *         unit:
+ *           type: string
+ *         weeklyAvg:
+ *           type: number
+ *         monthlyAvg:
+ *           type: number
+ *         weeklyTrend:
+ *           type: number
+ *         monthlyTrend:
+ *           type: number
+ *         weeklyDataPoints:
+ *           type: number
+ *         monthlyDataPoints:
+ *           type: number
+ */
+
+/**
+ * @swagger
+ * /api/progress:
+ *   get:
+ *     summary: Get all progress metrics for current user with filtering options
+ *     tags: [Progress]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: metric
+ *         schema:
+ *           type: string
+ *           enum: [weight, steps, calories, water, heartRate, sleep, bodyFat, other]
+ *         description: Filter by metric type
+ *       - in: query
+ *         name: startDate
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Filter by start date
+ *       - in: query
+ *         name: endDate
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Filter by end date
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           default: 1
+ *         description: Page number for pagination
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 30
+ *         description: Number of items per page
+ *     responses:
+ *       200:
+ *         description: List of progress entries with pagination
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 progress:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Progress'
+ *                 pagination:
+ *                   type: object
+ *                   properties:
+ *                     total:
+ *                       type: integer
+ *                     page:
+ *                       type: integer
+ *                     pages:
+ *                       type: integer
+ *       401:
+ *         description: Not authenticated
+ *       500:
+ *         description: Server error
  */
 router.get('/', auth, async (req, res) => {
   try {
@@ -58,9 +175,54 @@ router.get('/', auth, async (req, res) => {
 });
 
 /**
- * @route   GET /api/progress/:metric
- * @desc    Get progress data for a specific metric
- * @access  Private
+ * @swagger
+ * /api/progress/{metric}:
+ *   get:
+ *     summary: Get progress data for a specific metric
+ *     tags: [Progress]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: metric
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [weight, steps, calories, water, heartRate, sleep, bodyFat, other]
+ *         description: The metric type to retrieve
+ *       - in: query
+ *         name: startDate
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Filter by start date
+ *       - in: query
+ *         name: endDate
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Filter by end date
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 30
+ *         description: Number of entries to return
+ *     responses:
+ *       200:
+ *         description: List of progress entries for the specified metric
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Progress'
+ *       400:
+ *         description: Invalid metric type
+ *       401:
+ *         description: Not authenticated
+ *       500:
+ *         description: Server error
  */
 router.get('/:metric', auth, async (req, res) => {
   try {
@@ -114,9 +276,49 @@ router.get('/:metric', auth, async (req, res) => {
 });
 
 /**
- * @route   POST /api/progress
- * @desc    Record new progress metric
- * @access  Private
+ * @swagger
+ * /api/progress:
+ *   post:
+ *     summary: Record new progress metric
+ *     tags: [Progress]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - metric
+ *               - value
+ *               - unit
+ *             properties:
+ *               metric:
+ *                 type: string
+ *                 enum: [weight, steps, calories, water, heartRate, sleep, bodyFat, other]
+ *               value:
+ *                 type: number
+ *               unit:
+ *                 type: string
+ *               date:
+ *                 type: string
+ *                 format: date-time
+ *               notes:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Progress entry created or updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Progress'
+ *       400:
+ *         description: Invalid input data
+ *       401:
+ *         description: Not authenticated
+ *       500:
+ *         description: Server error
  */
 router.post(
   '/',
@@ -187,9 +389,51 @@ router.post(
 );
 
 /**
- * @route   PUT /api/progress/:id
- * @desc    Update progress metric
- * @access  Private
+ * @swagger
+ * /api/progress/{id}:
+ *   put:
+ *     summary: Update progress metric
+ *     tags: [Progress]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Progress entry ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               value:
+ *                 type: number
+ *               unit:
+ *                 type: string
+ *               date:
+ *                 type: string
+ *                 format: date-time
+ *               notes:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Progress entry updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Progress'
+ *       400:
+ *         description: Invalid input data
+ *       401:
+ *         description: Not authenticated
+ *       404:
+ *         description: Progress entry not found
+ *       500:
+ *         description: Server error
  */
 router.put(
   '/:id',
@@ -247,9 +491,36 @@ router.put(
 );
 
 /**
- * @route   DELETE /api/progress/:id
- * @desc    Delete progress metric
- * @access  Private
+ * @swagger
+ * /api/progress/{id}:
+ *   delete:
+ *     summary: Delete progress metric
+ *     tags: [Progress]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Progress entry ID
+ *     responses:
+ *       200:
+ *         description: Progress entry deleted
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       401:
+ *         description: Not authenticated
+ *       404:
+ *         description: Progress entry not found
+ *       500:
+ *         description: Server error
  */
 router.delete('/:id', auth, async (req, res) => {
   try {
@@ -277,9 +548,34 @@ router.delete('/:id', auth, async (req, res) => {
 });
 
 /**
- * @route   GET /api/progress/summary/:metric
- * @desc    Get summary stats for a specific metric
- * @access  Private
+ * @swagger
+ * /api/progress/summary/{metric}:
+ *   get:
+ *     summary: Get summary stats for a specific metric
+ *     tags: [Progress]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: metric
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [weight, steps, calories, water, heartRate, sleep, bodyFat]
+ *         description: The metric type to get summary for
+ *     responses:
+ *       200:
+ *         description: Summary statistics for the metric
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ProgressSummary'
+ *       400:
+ *         description: Invalid metric type
+ *       401:
+ *         description: Not authenticated
+ *       500:
+ *         description: Server error
  */
 router.get('/summary/:metric', auth, async (req, res) => {
   try {
